@@ -1,15 +1,16 @@
-import { makeAutoObservable } from "mobx";
-import { ShoppingItem } from "../utils";
+import { makeAutoObservable } from 'mobx';
+
+import { ShopingItem } from '../models/ShopingItem';
 
 class ShopingStore {
-  items: ShoppingItem[] = [];
+  public items: ShopingItem[] = [];
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {}, { autoBind: true });
   }
 
   addItem(name: string, quantity: number) {
-    const newItem = new ShoppingItem(Date.now(), name, quantity);
+    const newItem = new ShopingItem({ id: Date.now(), name, quantity, purchased: false });
     this.items.push(newItem);
   }
 
